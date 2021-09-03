@@ -248,10 +248,10 @@ def hasintersectionrange(grid, y1, y2, x1, x2, verbose=True):
     while i <= y2:
         j = x1
         while j <= x2:
-            #print(f"checking cell ({i},{j})") # debug
+            print(f"Posição setando a posição do barco ({i},{j})") # debug
             if hasintersection(grid, i, j, verbose):
                 return True
-            #print("cell check complete") # debug
+            print("cell check complete") # debug
             j+=1
         i+=1
     return False
@@ -259,7 +259,7 @@ def hasintersectionrange(grid, y1, y2, x1, x2, verbose=True):
 def placeship(grid, shipname, y, x, isvertical=False, verbose=True):
     if isvertical:
         if not hasintersectionrange(grid, y, y+ships[shipname]-1, x, x, verbose):
-            #print(f"\t\tadding {shipname}")
+            print(f"\t\t ADD: {shipname}")
             for i in range(ships[shipname]):
                 grid[y+i][x]=shipname[0]
             return True
@@ -319,7 +319,7 @@ def inputship(grid, shipname):
         #print(f"cell {x},{y}")
 
         while isvertical != "y" and isvertical != "n":
-            isvertical = input("Gostaria de colocar a embarcação na vertical? (y/n)\n>: ")
+            isvertical = input("Gostaria de colocar a embarcação na vertical? (y ou n)\n>: ")
         #print(isvertical)
         if isvertical == "y":
             isvertical = True
@@ -357,14 +357,16 @@ def inputship(grid, shipname):
 
 def playersetup(name, iscomp):
     grid = [[" " for i in range(gridsize)] for j in range(gridsize)]
-    #print(name)
+    print(name)
     if not iscomp:
-        printgrid(grid)
+        printgrid(grid)# gera a tabela vazia
     for x in ships:
         if iscomp:
-            placerandom(grid,x)
+            print("posicionar Automaticamente")
+            placerandom(grid,x)#respostavel por geral o tabuleiro de forma automatica
         else:
-            inputship(grid, x)
+            print("Posicionar Manualmente")
+            inputship(grid, x)#respostavel por geral o tabuleiro manualmente
             printgrid(grid)
     return grid
 
@@ -603,7 +605,7 @@ while True:
         p2auto = True
 
     ### board setup
-    gridp1 = playersetup(p1name, p1auto)
+    gridp1 = playersetup(p1name, p1auto) #chama o metodo para de posicionar os barcos manualmente ou automaticamente
     gridp2 = playersetup(p2name, p2auto)
 
     ### play
