@@ -230,7 +230,7 @@ def pubgen(grid):
 
 def hasintersection(grid, y, x, verbose=True):
     #print(f"checking intersection {x},{y}")
-    if x >= gridsize or y >= gridsize or x < 0 or y < 0:
+    if x >= gridsize or y >= gridsize or x < 0 or y < 0:# verifica se o barco esta dentro do tabuleiro e se não esta em uma posição vazia
         if verbose:
             print(f"\tEmbarcação fora do tabuleiro! ({numtocoord(x)}{y})")
         return True
@@ -251,7 +251,7 @@ def hasintersectionrange(grid, y1, y2, x1, x2, verbose=True):
             print(f"Posição setando a posição do barco ({i},{j})") # debug
             if hasintersection(grid, i, j, verbose):
                 return True
-            print("cell check complete") # debug
+            print(f"Pode add barbo na  complete: ({i},{j})") # debug
             j+=1
         i+=1
     return False
@@ -420,8 +420,8 @@ def compmove(probabilitygrid):
                 movx = x
                 movy = y
                 bignum = probabilitygrid[y][x]
-    #print(f"Computer attacks {numtocoord(movx)}{movy}!") # debug
-    #print(f"(attack value {bignum})") # debug
+    print(f"Computer attacks {numtocoord(movx)}{movy}!") # debug
+    print(f"(attack value {bignum})") # debug
     return (movx,movy)
 
 def numtocoord(x):
